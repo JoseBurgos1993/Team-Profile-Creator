@@ -34,23 +34,7 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-inquirer.prompt(
-    {
-        type: "list",
-        message: "What type of employee are you?",
-        name: "role",
-        choices: ["Team Manager", "Engineer", "Intern"]
-    }
-).then(function(response){
-    switch(response.role){
-        case "Team Manager": queryManager(); break;
-        case "Engineer": queryEngineer(); break;
-        case "Intern": queryIntern(); break;
-        default: console.log("ERROR");
-    }
-});
-
-async const queryManager = () => {
+async function queryManager(){
     try{
         const { name } = await inquirer.prompt({
             message: "What is the team manager's name?",
@@ -68,13 +52,13 @@ async const queryManager = () => {
             message: "What is the team manager's office number?",
             name: "officeNumber"
         });
-        return new Manager(name,email,id,officeNumber);
+        return new Manager(name,id,email,officeNumber);
     } catch(err){
         console.log(err);
     }
 }
 
-async const queryEngineer = () => {
+async function queryEngineer(){
     try{
         const { name } = await inquirer.prompt({
             message: "What is this engineer's name?",
@@ -92,13 +76,13 @@ async const queryEngineer = () => {
             message: "What is this engineer's github username?",
             name: "github"
         });
-        return new Engineer(name,email,id,github);
+        return new Engineer(name,id,email,github);
     } catch(err){
         console.log(err);
     }
 }
 
-async const queryIntern = () => {
+async function queryIntern(){
     try{
         const { name } = await inquirer.prompt({
             message: "What is this intern's name?",
@@ -116,8 +100,69 @@ async const queryIntern = () => {
             message: "What school did this intern go to?",
             name: "school"
         });
-        return new Intern(name,email,id,school);
+        return new Intern(name,id,email,school);
     } catch(err){
         console.log(err);
     }
 }
+
+async function init(){
+    var employees = [];
+    console.log("Thank you for using Team Creator. To create mini profiles for each team member, please answer the following questions.");
+    //employees.push(queryManager());
+    const manager = await queryManager();
+    employees.push(manager);
+    try{
+        let good = false;
+        let value = 0;
+        while(!good){
+            const { engCount } = await inquirer.prompt({
+                message: "How many engineers are in part of this team?",
+                name: "engCount"
+            });
+            if(Number.isInteger(Number(engCount)) && Number(engCount) >= 0){
+                value = parseInt(engCount);
+                good = true;
+            } else{
+                console.log("Input must be an integer that is at least equal to 0 (zero).")
+            }
+        }
+        for(let i = 0; i < value; i++){
+            const obj = await queryEngineer();
+            employees.push(obj);
+            if(value - 1 != i){
+                console.log("Next person: ");
+            }
+        }
+        good = false;
+        value = 0;
+        while(!good){
+            const { intCount } = await inquirer.prompt({
+                message: "How many interns are in part of this team?",
+                name: "intCount"
+            });
+            if(Number.isInteger(Number(intCount)) && Number(intCount) >= 0){
+                value = parseInt(intCount);
+                good = true;
+            } else{
+                console.log("Input must be an integer that is at least equal to 0 (zero).")
+            }
+        }
+        for(let i = 0; i < value; i++){
+            const obj = await queryIntern();
+            employees.push(obj);
+            if(value - 1 != i){
+                console.log("Next person: ");
+            }
+        }
+        console.log("-------------------");
+        console.log(employees);
+        console.log("-------------------");
+
+
+
+    } catch(err){
+        console.log(err);
+    }
+}
+init();
