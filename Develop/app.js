@@ -106,6 +106,15 @@ async function queryIntern(){
     }
 }
 
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function(err){
+        if(err){
+            return console.log(err);
+        }
+        console.log("File successfully created!");
+    })
+}
+
 async function init(){
     var employees = [];
     console.log("Thank you for using Team Creator. To create mini profiles for each team member, please answer the following questions.");
@@ -159,8 +168,8 @@ async function init(){
         console.log(employees);
         console.log("-------------------");
 
-
-
+        const html = render(employees);
+        writeToFile("./output/index.html",html);
     } catch(err){
         console.log(err);
     }
