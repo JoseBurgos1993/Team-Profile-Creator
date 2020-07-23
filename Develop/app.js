@@ -33,3 +33,91 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+inquirer.prompt(
+    {
+        type: "list",
+        message: "What type of employee are you?",
+        name: "role",
+        choices: ["Team Manager", "Engineer", "Intern"]
+    }
+).then(function(response){
+    switch(response.role){
+        case "Team Manager": queryManager(); break;
+        case "Engineer": queryEngineer(); break;
+        case "Intern": queryIntern(); break;
+        default: console.log("ERROR");
+    }
+});
+
+async const queryManager = () => {
+    try{
+        const { name } = await inquirer.prompt({
+            message: "What is the team manager's name?",
+            name: "name"
+        });
+        const { email } = await inquirer.prompt({
+            message: "What is the team manager's email?",
+            name: "email"
+        });
+        const { id } = await inquirer.prompt({
+            message: "What is the team manager's id number?",
+            name: "id"
+        });
+        const {officeNumber } = await inquirer.prompt({
+            message: "What is the team manager's office number?",
+            name: "officeNumber"
+        });
+        return new Manager(name,email,id,officeNumber);
+    } catch(err){
+        console.log(err);
+    }
+}
+
+async const queryEngineer = () => {
+    try{
+        const { name } = await inquirer.prompt({
+            message: "What is this engineer's name?",
+            name: "name"
+        });
+        const { email } = await inquirer.prompt({
+            message: "What is this engineer's email?",
+            name: "email"
+        });
+        const { id } = await inquirer.prompt({
+            message: "What is this engineer's id number?",
+            name: "id"
+        });
+        const {github } = await inquirer.prompt({
+            message: "What is this engineer's github username?",
+            name: "github"
+        });
+        return new Engineer(name,email,id,github);
+    } catch(err){
+        console.log(err);
+    }
+}
+
+async const queryIntern = () => {
+    try{
+        const { name } = await inquirer.prompt({
+            message: "What is this intern's name?",
+            name: "name"
+        });
+        const { email } = await inquirer.prompt({
+            message: "What is this intern's email?",
+            name: "email"
+        });
+        const { id } = await inquirer.prompt({
+            message: "What is this intern's id number?",
+            name: "id"
+        });
+        const {school } = await inquirer.prompt({
+            message: "What school did this intern go to?",
+            name: "school"
+        });
+        return new Intern(name,email,id,school);
+    } catch(err){
+        console.log(err);
+    }
+}
