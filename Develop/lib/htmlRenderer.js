@@ -5,11 +5,25 @@ const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
   const html = [];
-
   html.push(employees
     .filter(employee => employee.getRole() === "Manager")
     .map(manager => renderManager(manager))
   );
+  const engList = employees
+  .filter(employee => employee.getRole() === "Engineer")
+  .map(engineer => renderEngineer(engineer));
+
+  const intList = employees
+  .filter(employee => employee.getRole() === "Intern")
+  .map(intern => renderIntern(intern));
+
+  for(let i = 0; i < engList.length; i++){
+    html.push(engList[i]);
+  }
+  for(let i = 0; i < intList.length; i++){
+    html.push(intList[i]);
+  }
+  /*
   html.push(employees
     .filter(employee => employee.getRole() === "Engineer")
     .map(engineer => renderEngineer(engineer))
@@ -18,7 +32,8 @@ const render = employees => {
     .filter(employee => employee.getRole() === "Intern")
     .map(intern => renderIntern(intern))
   );
-
+  */
+  console.log(html);
   return renderMain(html.join(""));
 
 };

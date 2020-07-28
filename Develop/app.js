@@ -118,7 +118,6 @@ function writeToFile(fileName, data) {
 async function init(){
     var employees = [];
     console.log("Thank you for using Team Creator. To create mini profiles for each team member, please answer the following questions.");
-    //employees.push(queryManager());
     const manager = await queryManager();
     employees.push(manager);
     try{
@@ -126,7 +125,7 @@ async function init(){
         let value = 0;
         while(!good){
             const { engCount } = await inquirer.prompt({
-                message: "How many engineers are in part of this team?",
+                message: "How many engineers are part of this team?",
                 name: "engCount"
             });
             if(Number.isInteger(Number(engCount)) && Number(engCount) >= 0){
@@ -147,7 +146,7 @@ async function init(){
         value = 0;
         while(!good){
             const { intCount } = await inquirer.prompt({
-                message: "How many interns are in part of this team?",
+                message: "How many interns are part of this team?",
                 name: "intCount"
             });
             if(Number.isInteger(Number(intCount)) && Number(intCount) >= 0){
