@@ -1,4 +1,4 @@
-<div class="card employee-card" style="background-color: khaki;">
+<div class="card employee-card" style="background-color: khaki; position: absolute; left: {{ left }}px; top: {{ top }}px;">
     <div class="card-header">
         <h2 class="card-title">{{ name }}</h2>
         <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
@@ -6,7 +6,7 @@
     <div class="card-body">
         <ul class="list-group">
             <li class="list-group-item">ID: {{ id }}</li>
-            <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
+            <li class="list-group-item">Email: <br><a href="mailto:{{ email }}">{{ email }}</a></li>
             <li class="list-group-item">School: {{ school }}</li>
         </ul>
     </div>
