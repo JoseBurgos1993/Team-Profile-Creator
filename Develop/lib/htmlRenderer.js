@@ -9,6 +9,8 @@ const render = employees => {
     .filter(employee => employee.getRole() === "Manager")
     .map(manager => renderManager(manager))
   );
+
+  // I had to change this because an annoying comma would appear on the outputed html page
   const engList = employees
   .filter(employee => employee.getRole() === "Engineer")
   .map(engineer => renderEngineer(engineer));
