@@ -1,7 +1,7 @@
-# 10_Homework
+# Team Profile Creator
 For this assignment, I was tasked to create a Team Profile Creator application. I used Inquirer to probe the user for information on the team manager, and any engineers or interns that are in the group. The application will then create a new html page that shows off the team.
 
-The github repository is [here](https://github.com/JoseBurgos1993/10_Homework). Here is a [video](https://drive.google.com/file/d/1w94WzslAq3vH9V8AFJza9VdjQRhgL7Bo/view) that demostrates the application in action.
+The github repository is [here](https://github.com/JoseBurgos1993/Team-Profile-Creator). Here is a [video](https://drive.google.com/file/d/1w94WzslAq3vH9V8AFJza9VdjQRhgL7Bo/view) that demostrates the application in action.
 
 ## Table of Contents
 * [Usage](#usage)
